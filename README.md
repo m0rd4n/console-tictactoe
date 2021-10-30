@@ -1,4 +1,4 @@
-# Tic-Tac-Toe (console, python3)
+# Tic-Tac-Toe (console)
 This is just a simple Tic-Tac-Toe without any GUI.
 
 Rules are like in normal Tic-Tac-Toe. 
@@ -12,3 +12,6 @@ if you don't have one you can use the following "grid":
 ---------
 1 | 2 | 3
 ```
+
+### Requirements:
+- [Python 3.X](https://www.python.org/downloads/)
