@@ -1,4 +1,4 @@
-def print_board(field):
+def print_board(field: list) -> None:
     c = 2
     for row in field:
         print(f"{row[0]} | {row[1]} | {row[2]}")
@@ -7,7 +7,7 @@ def print_board(field):
             c -= 1
     print('\n')
 
-def possible_moves(field):
+def possible_moves(field: list) -> bool:
     for row in field:
         for col in row:
             if col == ' ':
@@ -15,7 +15,7 @@ def possible_moves(field):
     return False
 
 # make a move if possible else return false (positions are like on numpad)
-def make_move(field, symbol, pos):
+def make_move(field: list, symbol: str, pos: int) -> bool:
     positions = [(2,0), (2,1), (2,2), (1,0), (1,1), (1,2), (0,0), (0,1), (0,2)]
     row, column = positions[pos - 1]
     if field[row][column] == ' ':
@@ -24,7 +24,7 @@ def make_move(field, symbol, pos):
     else:
         return False
 
-def check_win(field, current_symbol):
+def check_win(field: list, current_symbol: str) -> bool:
     # vertical
     for i in range(3):
         if field[i][0] == current_symbol:
@@ -40,8 +40,9 @@ def check_win(field, current_symbol):
         return (field[0][0] == field[1][1] and field[1][1] == field[2][2]) or (field[0][2] == field[1][1] and field[1][1] == field[2][0])
     return False
 
+
 # main function for game
-def play(field, symbol_one, symbol_two):
+def play(field: list, symbol_one: str, symbol_two: str) -> int:
     turn = 0
     symbol = ''
     while True:
@@ -52,9 +53,12 @@ def play(field, symbol_one, symbol_two):
         else:
             symbol = symbol_two
         while True:
-            pos = int(input(f"Player {(turn % 2) + 1} enter your position: "))
-            if make_move(field, symbol, pos):
-                break
+            try:
+                pos = int(input(f"Player {(turn % 2) + 1} enter your position: "))
+                if make_move(field, symbol, pos):
+                    break
+            except:
+                print("invalid position!")
         print_board(field)
         if check_win(field, symbol):
             return 1 if symbol == symbol_one else 2
