@@ -7,6 +7,7 @@ def print_board(field: list) -> None:
             c -= 1
     print('\n')
 
+
 def possible_moves(field: list) -> bool:
     for row in field:
         for col in row:
@@ -14,15 +15,18 @@ def possible_moves(field: list) -> bool:
                 return True
     return False
 
+
 # make a move if possible else return false (positions are like on numpad)
 def make_move(field: list, symbol: str, pos: int) -> bool:
-    positions = [(2,0), (2,1), (2,2), (1,0), (1,1), (1,2), (0,0), (0,1), (0,2)]
+    positions = [(2, 0), (2, 1), (2, 2), (1, 0), (1, 1),
+                 (1, 2), (0, 0), (0, 1), (0, 2)]
     row, column = positions[pos - 1]
     if field[row][column] == ' ':
         field[row][column] = symbol
         return True
     else:
         return False
+
 
 def check_win(field: list, current_symbol: str) -> bool:
     # vertical
@@ -54,7 +58,8 @@ def play(field: list, symbol_one: str, symbol_two: str) -> int:
             symbol = symbol_two
         while True:
             try:
-                pos = int(input(f"Player {(turn % 2) + 1} enter your position: "))
+                pos = int(
+                    input(f"Player {(turn % 2) + 1} enter your position: "))
                 if make_move(field, symbol, pos):
                     break
             except:
@@ -63,6 +68,7 @@ def play(field: list, symbol_one: str, symbol_two: str) -> int:
         if check_win(field, symbol):
             return 1 if symbol == symbol_one else 2
         turn = (turn + 1) % 2
+
 
 if __name__ == '__main__':
     # let users pick a custom symbol
@@ -74,7 +80,6 @@ if __name__ == '__main__':
     # loop for game
     while True:
         field = [[' ' for _ in range(3)] for _ in range(3)]
-        
         game = play(field, user_symbols[0], user_symbols[1])
         if game == 0:
             print('\033[93m' + "Tie!" + '\033[0m')
