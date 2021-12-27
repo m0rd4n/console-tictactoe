@@ -1,4 +1,5 @@
 def print_board(field: list) -> None:
+    """prints the current board"""
     c = 2
     for row in field:
         print(f"{row[0]} | {row[1]} | {row[2]}")
@@ -9,6 +10,7 @@ def print_board(field: list) -> None:
 
 
 def possible_moves(field: list) -> bool:
+    """returns true if there is an empty field"""
     for row in field:
         for col in row:
             if col == ' ':
@@ -16,8 +18,8 @@ def possible_moves(field: list) -> bool:
     return False
 
 
-# make a move if possible else return false (positions are like on numpad)
 def make_move(field: list, symbol: str, pos: int) -> bool:
+    """returns true if given position is available (positions are like on numpad)"""
     positions = [(2, 0), (2, 1), (2, 2), (1, 0), (1, 1),
                  (1, 2), (0, 0), (0, 1), (0, 2)]
     row, column = positions[pos - 1]
@@ -29,6 +31,7 @@ def make_move(field: list, symbol: str, pos: int) -> bool:
 
 
 def check_win(field: list, current_symbol: str) -> bool:
+    """checks if entered symbol has 3 in a row"""
     # vertical
     for i in range(3):
         if field[i][0] == current_symbol:
@@ -45,8 +48,8 @@ def check_win(field: list, current_symbol: str) -> bool:
     return False
 
 
-# main function for game
 def play(field: list, symbol_one: str, symbol_two: str) -> int:
+    """starts the game"""
     turn = 0
     symbol = ''
     while True:
